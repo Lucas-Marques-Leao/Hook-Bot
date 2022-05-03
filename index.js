@@ -1,50 +1,52 @@
-const Discord = require('discord.js')
-const dotenv = require('dotenv')
-const { Routes } = require('discord-api-types/v9')
-const { REST } = require('@discordjs/rest')
-const fs = require('node:fs')
-dotenv.config()
+const Discord = require("discord.js")
+const client = new Discord.Client({intents: Discord.Intents.FLAGS.GUILD_MESSAGES})
+const config = require("./config.json")
 
+client.login(config.token)
 
-const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES]})
-client.commands = new Collection();
-
-
-client.once('ready', () => {
-	console.log(`Logged in as ${client.user.tag}`)
-
-	const guildId = '970802893798117406'
-	const guild = client.guilds.cache.get(guildId)
-	const commands = []
-	
-	
-	const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-	for (const file of commandFiles) {
-		const command = require(`./commands/${file}`);
-		// Set a new item in the Collection
-		// With the key as the command name and the value as the exported module
-		client.commands.set(command.data.name, command);
-	}
-
-	const rest = new REST({ version: '9' }).setToken(process.env.TOKEN)
-
-
-	
+client.once('ready', async () => {
+	console.log(`Logado em ${client.user.username} com sucesso!`)
 })
 
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return
+module.exports = client
+client.commands = new Discord.Collection()
+client.slashCommands = new Discord.Collection()
+client.config = require("./config.json")
+require("./handler")(client)
+const { glob } = require("glob")
+const { promisify } = require("util")
 
-	const { commandName } = interaction
+const globPromise = promisify(glob)
 
-	if (commandName === 'ping') {
-		await interaction.reply('Pong!')
-	} else if (commandName === 'beep') {
-		await interaction.reply('Boop!')
+client.on("interactionCreate", async (interaction) => {
+	if (!interaction.guild) return
+
+	if (interaction.isCommand()){
+		const cmd = client.slashCommands.get(interaction.commandName)
+
+		if (!cmd) 
+			return
+		const args = []
+
+		for (let option of interaction.options.data){
+			if (option.type === "SUB_COMMAND"){
+				if (option.name) args.push(option.name)
+				option.options?.forEach((x) => {
+					if (x.value) args.push(option.value)
+				})
+			}else if (option.value) args.push(option.value)
+		}
+
+		cmd.run(client, interaction, args)
 	}
-});
 
-
-client.login(process.env.TOKEN)
-
+	if (interaction.isContextMenu()){
+		await interaction.deferReply({ ephemeral: false})
+		
+		const command = client.slashCommands.get(interaction.commandName)
+		
+		if (command){
+			command.run(client, interaction)
+		}
+	}
+})
