@@ -1,52 +1,27 @@
-const Discord = require("discord.js")
-const client = new Discord.Client({intents: Discord.Intents.FLAGS.GUILD_MESSAGES})
-const config = require("./config.json")
+const Discord = require('discord.js')
+const { token } = require('./config.json')
 
-client.login(config.token)
 
-client.once('ready', async () => {
-	console.log(`Logado em ${client.user.username} com sucesso!`)
+const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES]})
+
+
+client.once('ready', () =>{
+	console.log(`${client.user.username} tá ON!`)
 })
 
-module.exports = client
-client.commands = new Discord.Collection()
-client.slashCommands = new Discord.Collection()
-client.config = require("./config.json")
-require("./handler")(client)
-const { glob } = require("glob")
-const { promisify } = require("util")
-
-const globPromise = promisify(glob)
-
-client.on("interactionCreate", async (interaction) => {
-	if (!interaction.guild) return
-
-	if (interaction.isCommand()){
-		const cmd = client.slashCommands.get(interaction.commandName)
-
-		if (!cmd) 
-			return
-		const args = []
-
-		for (let option of interaction.options.data){
-			if (option.type === "SUB_COMMAND"){
-				if (option.name) args.push(option.name)
-				option.options?.forEach((x) => {
-					if (x.value) args.push(option.value)
-				})
-			}else if (option.value) args.push(option.value)
-		}
-
-		cmd.run(client, interaction, args)
-	}
-
-	if (interaction.isContextMenu()){
-		await interaction.deferReply({ ephemeral: false})
-		
-		const command = client.slashCommands.get(interaction.commandName)
-		
-		if (command){
-			command.run(client, interaction)
-		}
+client.on('messageCreate',  interaction =>{
+	
+	if (interaction.content === '/pica'){
+		interaction.reply(`suas bolas foram lustradas, sinta-se à vontade ${interaction.author}`)
+	}else if (interaction.content === '/rola'){
+		interaction.reply(`que falta de vergonha! UMA ROULA`)
+	}else if (interaction.content === '/deus'){
+		interaction.reply(`${interaction.author}, nem tente, você jamais vai chegar aos pés do Deus EDNALDO PEREIRA`)
+		interaction.channel.send({files: ["./fotos/pisque.jpg"]})
+	}else if (interaction.content ==='/ping'){
+		interaction.reply(`O ping do Bot é ${client.ws.ping}ms`)
 	}
 })
+
+
+client.login(token)
