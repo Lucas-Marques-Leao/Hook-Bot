@@ -1,33 +1,34 @@
 const Discord = require('discord.js')
-const db = require('quick.db')
+
 
 
 module.exports = {
-    name: "stats",
-    aliases: ["stats"],
+    name: "sheet stats",
+    description: "O bot vai te mencionar e embedar sua ficha",
+    author: "Lucas Marques",
 
-    run: async(client, messsage, args) => {
+    run: async(client, message, args) => {
 
-        if (!message.member.permissions.has("ADMINISTRATOR")) {
-            message.reply("Você não possui permissão para executar este comando")
-     }else{
-        let embed_1 = new Discord.MessageEmbed()
-        .setColor("RAMDOM")
-        .setDescription(`${messsage.author} Qual será o chat a enviar o anúncio?`);
+        // at the top of your file
+        const exampleEmbed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle('Some title')
+            .setURL('https://discord.js.org/')
+            .setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+            .setDescription('Some description here')
+            .setThumbnail('https://i.imgur.com/AfFp7pu.png')
+            .addFields(
+                { name: 'Regular field title', value: 'Some value here' },
+                { name: '\u200B', value: '\u200B' },
+                { name: 'Inline field title', value: 'Some value here', inline: true },
+                { name: 'Inline field title', value: 'Some value here', inline: true },
+            )
+            .addField('Inline field title', 'Some value here', true)
+            .setImage('https://i.imgur.com/AfFp7pu.png')
+            .setTimestamp()
+            .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
-        let embed_erro = new Discord.MessageEmbed()
-        .setColor("FF0000")
-        .setDescription(`${messsage.author} Não foi possível reconhecer um canal de texto.`);
-
-        let embed_2 = new Discord.MessageEmbed()
-        .setColor("RAMDOM")
-        .setDescription(`${messsage.author} Qual será o título do anúncio?`);
-
-        message.reply({embeds: [embed_1]}).then(msg => {
-            let coletor = messsage.channel.createMessageCollector({filters: mm => mm.author.id == message.author.id, max: 1})
-        })
-    }
-
+      channel.send({ embeds: [exampleEmbed] });
 
     }
 }
