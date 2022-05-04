@@ -1,9 +1,11 @@
-const { Client, Collection, Intents } = require('discord.js')
+const Discord = require('discord.js')
 const { token } = require('./config.json')
-/*const { charSheet } = require('./classes-da-ficha/ficha.js')*/
+const { charSheet } = require('./classes-da-ficha/ficha.js')
 const fs = require('node:fs')
+const { create } = require('node:domain')
+const { options } = require('nodemon/lib/config')
 
-/*
+
 //definições
 let c1 = new charSheet('Rayer', 'Humano', 'Sacerdote')
 const Rayer = c1.getNome()
@@ -42,23 +44,60 @@ c1.pornaTelaATabela()
 c2.pornaTelaATabela()
 c3.pornaTelaATabela()
 c4.pornaTelaATabela()
-*/
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS]})
 
-client.commands = new Collection()
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS]})
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	
-	// With the key as the command name and the value as the exported module
-	client.commands.set(command.data.name, command);
-}
+
 
 
 client.once('ready', () =>{
 	console.log(`${client.user.username} tá ON!`)
+
+	const guildId = '970802893798117406'
+	const guild = client.guilds.cache.get(guildId)
+	let commands
+
+	if(guild){
+		commands = guild.commands
+	}else{
+		commands = client.application?.commands
+	}
+
+	commands?.create({
+		name: 'ping',
+		description: 'pinga!'
+
+	})
+
+	commands?.create({
+		name: 'server',
+		description: 'Dados do Servidor'
+	})
+
+	commands?.create({
+		name: 'user',
+		description: 'Dados do Usuário'
+	})
+
+	commands?.create({
+		name: 'rpg',
+		description: 'Nome da Ficha e Ação',
+		options: [
+			{
+				name: 'charsheet',
+				description: 'O Nome do seu Personagem',
+				required: true,
+				type : Discord.Constants.ApplicationCommandOptionTypes.STRING
+			},
+			{
+				name: 'attack',
+				description: 'Ação',
+				required: true,
+				type : Discord.Constants.ApplicationCommandOptionTypes.STRING
+			}
+		]
+	})
 })
 
 /*client.on('messageCreate',  interaction =>{
@@ -125,19 +164,36 @@ client.once('ready', () =>{
 })*/
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isCommand()) {return}
 
-	const command = client.commands.get(interaction.commandName);
+	const { commandName, options } = interaction;
 
-	if (!command) return;
+	if (commandName === 'ping') {
+		 await interaction.reply('Pong!');
+	} else if (commandName === 'server') {
+		await interaction.reply(`Nome do Servidor: ${interaction.guild.name}\nTotal de Participantes: ${interaction.guild.memberCount}`);
+	} else if (commandName === 'user') {
+		await interaction.reply(`Sua tag: ${interaction.user.tag}\nSeu id: ${interaction.user.id}`);
+	}else if (commandName === 'rpg'){
+		const charSheet = options.getString('charsheet')
+		const attack = options.getString('attack')
 
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		if (charSheet === 'Klaus'){
+			interaction.reply({
+				content: `${c2.informacoes}`,
+				ephemeral: true
+			})
+		}else if(charSheet === 'Eris'){
+			interaction.reply({
+				content: `${c3.informacoes}`,
+				ephemeral: true
+			})
+		}
+		
+	}else if (commandName === 'pica'){
+
 	}
-});
 
+});
 
 client.login(token)
