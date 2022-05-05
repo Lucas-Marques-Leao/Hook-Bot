@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "porra": "nodemon index.js",
-    "caralho": "node deploy-commands.js"
+    ".": "nodemon src/index.js"
   },
   "keywords": [
     "bot",
