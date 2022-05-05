@@ -8,7 +8,7 @@ const charSheet  =  class Ficha {
         this.nivel = 1
         this.classeSec = "Nenhuma"
         this.nivelSec = 0
-        this.idade = 12
+        this.idade = "12 anos"
         this.setAtributos(10, 10, 10, 10, 10, 10)
         this.inventario = []
         this.saude = 10
@@ -297,28 +297,36 @@ const charSheet  =  class Ficha {
          Nome: ${this.getNome()} 
          Nível: ${this.getNivel()}
          Bônus de Proficiência: ${this.getProf()}
-         Raça: ${this.getRaça()} | Idade: ${this.getIdade()} 
-         Classe Primária: ${this.getClassePri()} | Nível Primário: ${this.getNivelPri()} 
-         Classe Secundária: ${this.getClasseSec()} | Nível Secundário: ${this.getNivelSec()} 
+         Raça: ${this.getRaça()} 
+         
+         Idade: ${this.getIdade()} 
+         
+         Classe Primária: ${this.getClassePri()} 
+         Nível Primário: ${this.getNivelPri()} 
+         
+         Classe Secundária: ${this.getClasseSec()} 
+         Nível Secundário: ${this.getNivelSec()} 
          
          Nível de Conjurador: ${this.getNivelConj()}
          Pontos de Vida: ${this.getSaude()} | Pontos de Vida Temporários: ${this.getSaudeTemp()}
          
          Inventário: ${this.getInventario()}
           
-         Atributos: Força: ${this.getStrAt()}
+         Atributos: 
+                     Força: ${this.getStrAt()}
                      Destreza: ${this.getDexAt()}
                      Constituição: ${this.getConAt()}
                      Inteligência: ${this.getIntAt()}
                      Sabedoria: ${this.getWisAt()}
                      Carisma: ${this.getChaAt()} 
         
-         Modificadores: Modificador de Força: ${this.getStrMod()}
-                    Modificador de Destreza: ${this.getDexMod()}
-                    Modificador de Constituição: ${this.getConMod()}
-                    Modificador de Inteligência: ${this.getIntMod()}
-                    Modiicador de Sabedoria: ${this.getWisMod()}
-                    Modificador de Carisma: ${this.getChaMod()}`
+         Modificadores: 
+                    Mod de Força: ${this.getStrMod()}
+                    Mod de Destreza: ${this.getDexMod()}
+                    Mod de Constituição: ${this.getConMod()}
+                    Mod de Inteligência: ${this.getIntMod()}
+                    Mod de Sabedoria: ${this.getWisMod()}
+                    Mod de Carisma: ${this.getChaMod()}`
     }
 
 }
