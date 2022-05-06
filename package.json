@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    ".": "nodemon src/index.js"
+    "/./": "nodemon src/index.js",
+    "db": "node src/dbLogin.js"
   },
   "keywords": [
     "bot",
@@ -20,8 +21,11 @@
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "glob": "^8.0.1",
+    "mongoose": "^6.3.2",
+    "mysql2": "^2.3.3",
     "nodemon": "^2.0.16",
     "puppeteer": "^13.7.0",
-    "quickdb": "^1.0.5"
+    "quickdb": "^1.0.5",
+    "sequelize": "^6.19.0"
   }
 }

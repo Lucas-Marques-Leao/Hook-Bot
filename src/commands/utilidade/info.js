@@ -1,9 +1,10 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
-const {charSheet} = require('../../classes-da-ficha/ficha.js')
+const { charSheet } = require('../../classes-da-ficha/ficha.js');
 
-const c1 = new charSheet("pica", "rola", "roula")
-c1.pornaTelaATabela()
+
+
+
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -26,13 +27,13 @@ module.exports = {
                 const userEmbed = new MessageEmbed()
                     .setTitle(`Sua ficha, ${user.username}!`)
                     .setURL("https://www.lmlservertest.x10.mx/suafichajs.html")
-                    .setDescription(`Ficha de ${c1.getNome()}`)
+                    .setDescription(`Ficha de Nome da sua ficha`)
                     .setThumbnail(client.user.displayAvatarURL())
                     .addFields(
                         { name: 'Usuário:', value: `${user.username}`, inline: true},
                         { name: `\u200B`, value: `\u200B`, inline: true},
                         { name: `Tag:`, value: `#${user.discriminator}`, inline: true},
-                        { name: 'Status da Ficha:', value: `${c1.informacoes}`}
+                        { name: 'Status da Ficha:', value: `Suas informações`}
                     )
                     .setImage("https://static.tvtropes.org/pmwiki/pub/images/external_contentduckduckgo_01.jpg")
                     .setTimestamp()
@@ -47,7 +48,7 @@ module.exports = {
                 await interaction.reply(`Usuário: ${interaction.user.username}\nSeu ID: ${interaction.user.id}`)
             }
         }else if (interaction.options.getSubcommand() === "server"){
-            await interaction.reply(`Nome do Servidor: ${interaction.guild.name}\nTotal de participantes: ${interaction.guild.memberCount}`)
+            await interaction.reply(`Nome do Servidor: ${interaction.guild.name}\nTotal de participantes: ${interaction.guild.memberCount} (bot também é gente!)`)
         }else{
             await interaction.reply('Nenhum subcomando foi utilizado.')
         }
