@@ -358,5 +358,5 @@ klaus.pornaTelaATabela()
 rayer.pornaTelaATabela()
 
 
-module.exports = {klaus}
-module.exports = {rayer}
+ 
+module.exports = {charSheet, klaus, rayer}
