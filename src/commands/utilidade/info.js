@@ -12,7 +12,7 @@ module.exports = {
 		.setDescription('Recebe informação sobre o RPG')
         .addSubcommand(subcommand => 
             subcommand
-                .setName("ficha")
+                .setName("user")
                 .setDescription('Info da ficha')
                 .addUserOption(option => option.setName("target").setDescription('o user mencionado')))
         .addSubcommand(subcommand =>
@@ -20,22 +20,21 @@ module.exports = {
                 .setName('server')
                 .setDescription('informações do server')),
 	async execute(interaction, client) {
-		if (interaction.options.getSubcommand() === "ficha"){
+		if (interaction.options.getSubcommand() === "user"){
             const user = interaction.options.getUser("target")
             if (user){
                 const file = new MessageAttachment('../../js/Hook Bot/src/fotos/darkicone.png');
                 const userEmbed = new MessageEmbed()
-                    .setTitle(`Sua ficha, ${user.username}!`)
+                    .setTitle(`Sobre: ${user.username}!`)
                     .setURL("https://www.lmlservertest.x10.mx/suafichajs.html")
-                    .setDescription(`Ficha de Nome da sua ficha`)
+                    .setDescription(`Você é bom, mas você não é... EDNALDO PEREIRA`)
                     .setThumbnail(client.user.displayAvatarURL())
                     .addFields(
                         { name: 'Usuário:', value: `${user.username}`, inline: true},
                         { name: `\u200B`, value: `\u200B`, inline: true},
                         { name: `Tag:`, value: `#${user.discriminator}`, inline: true},
-                        { name: 'Status da Ficha:', value: `Suas informações`}
                     )
-                    .setImage("https://static.tvtropes.org/pmwiki/pub/images/external_contentduckduckgo_01.jpg")
+                    .setImage("https://pbs.twimg.com/media/FRsSopEWYAADAZ1?format=jpg&name=small")
                     .setTimestamp()
                     .setFooter({
                         text: `${client.user.tag}`
@@ -43,7 +42,7 @@ module.exports = {
                     .setColor('RED');
                     
                     
-                await interaction.reply({ embeds: [userEmbed], ephemeral: true})
+                await interaction.reply({ embeds: [userEmbed], ephemeral: false})
             }else{
                 await interaction.reply(`Usuário: ${interaction.user.username}\nSeu ID: ${interaction.user.id}`)
             }
