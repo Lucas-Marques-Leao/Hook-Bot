@@ -29,16 +29,14 @@ module.exports = {
                     
                    
                     let d20 = Math.floor(Math.random() * 20) + 1;
-                    let d8 = Math.floor(Math.random() * 8) + 1;
-                    let d6 = Math.floor(Math.random() * 6) + 1;
                     let lamspectral = d20 + Number(klaus.getProf().replace("+", "")) + Number(klaus.getChaMod().replace("+", "")) + 3;
-                    let lamdmg = d8 + d8 + d8 + d8 + d8 + d8;
+                    
                     const embeda = new MessageEmbed()
                         .setTitle("Ataque com a Lâmina Espectral")
                         .setDescription("Lâmina Espectral (+3), Proficiente, Sifão d'alma(Pode usar o modificador-chave de conjuração para dano), dano crítico padrão")
                         .addFields(
-                            { name:"Rolagem de Ataque", value: `A Lâmina Espectral acerta ${d20}${klaus.getProf()}${klaus.getChaMod()}+3(${lamspectral}) contra a Classe de Armadura!`},
-                            { name:"Dano", value: `${d6}+${d8}+${d8}+${d8}+${d8}+${d8}+${13}(${d6 + 13 + lamdmg})`}
+                            { name:"Rolagem de Ataque", value: `A Lâmina Espectral acertou ${d20}${klaus.getProf()}${klaus.getChaMod()}+3(${lamspectral}) contra a Classe de Armadura!`, inline: true},
+                            { name:"Dano", value: `1d6+6d8+13 dano cortante (mágico)`, inline: true}
                         )
                         .setThumbnail(client.user.displayAvatarURL())
                         .setTimestamp()
@@ -53,7 +51,26 @@ module.exports = {
 
                 }else if (interaction.options.getSubcommand() === "eldblast") {
                     
-                    await interaction.reply({content: "Você é do RPG, mas não tem um Cargo de Ficha ainda"})
+                    
+                    let d20 = Math.floor(Math.random() * 20) + 1;
+                    let lamspectral = d20 + Number(klaus.getProf().replace("+", "")) + Number(klaus.getChaMod().replace("+", "")) + 3;
+                    
+                    const embeda2 = new MessageEmbed()
+                        .setTitle("Rajada Mística")
+                        .setDescription("4 Rajadas, Truque (rajadas adicionais aos níveis 5, 11, 17), dano crítico padrão")
+                        .addFields(
+                            { name:"Rolagem de Ataque Mágico", value: `O Ataque mágico acertou ${d20}${klaus.getProf()}${klaus.getChaMod()}(${lamspectral - 3}) contra a Classe de Armadura!`, inline: true},
+                            { name:"Dano", value: `1d10+5 dano de energia (mágico)`, inline: true}
+                        )
+                        .setThumbnail(client.user.displayAvatarURL())
+                        .setTimestamp()
+                        .setFooter({
+                            text: `${client.user.tag}`
+                        })
+                        .setColor('RANDOM');
+
+                        await interaction.reply({ embeds: [embeda2], ephemeral: false})
+
                 }else{
                     
                     await interaction.reply({content: "Você é do RPG, mas não tem um Cargo de Ficha ainda"})

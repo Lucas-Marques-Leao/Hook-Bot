@@ -2,24 +2,6 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const {  MessageAttachment, MessageEmbed } = require('discord.js');
 const { klaus, rayer } = require('../../classes-da-ficha/ficha.js');
 
-
-//Coisas:
-
-/*let klaus = new charSheet("Klaus", "Tiellfing", "Bruxo")
-let rayer = new charSheet("Rayer", "Humano", "Sacerdote")
-
-klaus.setAtributos(10, 10, 10, 10, 10, 10)
-klaus.setSaude(600)
-klaus.setNivelPri(18)
-klaus.setConjClass1PactMagic()
-
-rayer.setAtributos(20, 20, 20, 20, 20, 20)
-rayer.setSaude(90)
-rayer.setNivelPri(10)
-
-klaus.pornaTelaATabela()
-rayer.pornaTelaATabela()
-                            */
 module.exports = {
 	
         data: new SlashCommandBuilder()

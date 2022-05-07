@@ -4,8 +4,6 @@ module.exports = {
     if (!interaction.isCommand()) return;
 
 
-    
-    const hasRoleRpg = interaction.member.roles.cache.some(r => r.name === "RPG")
     const command = client.commands.get(interaction.commandName);
     
     if (!command) return;

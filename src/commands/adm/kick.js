@@ -10,3 +10,4 @@ module.exports = {
 		await interaction.reply({ content: "esse comando funfa!"});
 	},
 };
+
