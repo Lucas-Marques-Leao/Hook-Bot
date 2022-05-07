@@ -333,22 +333,24 @@ const charSheet  =  class Ficha {
 }
 
 
-module.exports = {charSheet}
+
 
 
 let klaus = new charSheet("Klaus", "Tielfing", "Bruxo")
 let rayer = new charSheet("Rayer", "Humano", "Clérigo")
 
 
-klaus.setAtributos(10, 10, 10, 10, 10, 10)
+klaus.setAtributos(10, 10, 16, 14, 18, 20)
 klaus.setSaude(600)
+klaus.setIdade("17 anos")
 klaus.setNivelPri(18)
 klaus.setConjClass1PactMagic()
 klaus.setInventario("Grimório Draemora")
-klaus.setInventario("Lâmina Espectral")
+klaus.setInventario("Lâmina Espectral(c)")
 
 rayer.setAtributos(9, 12, 8, 16, 22, 18)
 rayer.setSaude(90)
+rayer.setIdade("22 anos")
 rayer.setNivelPri(10)
 rayer.setInventario("Escudo de Madeira")
 rayer.setInventario("Símbolo Sagrado")
