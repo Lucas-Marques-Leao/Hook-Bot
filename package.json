@@ -25,6 +25,7 @@
     "mongoose": "^6.3.2",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.16",
+    "pg": "^8.7.3",
     "puppeteer": "^13.7.0",
     "quickdb": "^1.0.5",
     "sequelize": "^6.19.0"

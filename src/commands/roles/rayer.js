@@ -57,7 +57,7 @@ module.exports = {
                     
                     const embeda2 = new MessageEmbed()
                         .setTitle("Disparo Guia")
-                        .setDescription("Magia de 1º Círculo (Conjuração em níveis superiores: 1d6 extra por nível além do Primeiro), 36m de Alcance, Ataque Mágico, Guia Divino (Caso acerte, o Próximo ataque contra o Oponente terá vantagem), dano crítico padrão")
+                        .setDescription("Magia de 1º Círculo (Escola de Magia: Evocação, Conjuração em níveis superiores: 1d6 extra por nível além do Primeiro), 36m de Alcance, Ataque Mágico, Guia Divino (Caso acerte, o Próximo ataque contra o Oponente terá vantagem), dano crítico padrão")
                         .addFields(
                             { name:"Rolagem de Ataque Mágico", value: `O Ataque mágico acertou ${d20}${rayer.getProf()}${rayer.getWisMod()}(${raig}) contra a Classe de Armadura!`, inline: true},
                             { name:"Dano", value: `4d6 dano radiante (mágico)`, inline: true}

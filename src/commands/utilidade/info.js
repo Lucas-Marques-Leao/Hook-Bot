@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
-const { charSheet } = require('../../classes-da-ficha/ficha.js');
+
 
 
 
@@ -9,20 +9,22 @@ const { charSheet } = require('../../classes-da-ficha/ficha.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('info')
-		.setDescription('Recebe informação sobre o RPG')
+		.setDescription('Informação sobre usuários e servidor')
         .addSubcommand(subcommand => 
             subcommand
                 .setName("user")
-                .setDescription('Info da ficha')
-                .addUserOption(option => option.setName("target").setDescription('o user mencionado')))
+                .setDescription('Informações do usuário')
+                .addUserOption(option => option.setName("target").setDescription('o usúario mencionado')))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('server')
-                .setDescription('informações do server')),
+                .setDescription('Informações do server')),
+
 	async execute(interaction, client) {
 		if (interaction.options.getSubcommand() === "user"){
             const user = interaction.options.getUser("target")
             if (user){
+                
                 const file = new MessageAttachment('../../js/Hook Bot/src/fotos/darkicone.png');
                 const userEmbed = new MessageEmbed()
                     .setTitle(`Sobre: ${user.username}!`)
@@ -30,9 +32,11 @@ module.exports = {
                     .setDescription(`Você é bom, mas você não é... EDNALDO PEREIRA`)
                     .setThumbnail(client.user.displayAvatarURL())
                     .addFields(
+
                         { name: 'Usuário:', value: `${user.username}`, inline: true},
                         { name: `\u200B`, value: `\u200B`, inline: true},
                         { name: `Tag:`, value: `#${user.discriminator}`, inline: true},
+
                     )
                     .setImage("https://pbs.twimg.com/media/FRsSopEWYAADAZ1?format=jpg&name=small")
                     .setTimestamp()
@@ -49,7 +53,7 @@ module.exports = {
         }else if (interaction.options.getSubcommand() === "server"){
             await interaction.reply(`Nome do Servidor: ${interaction.guild.name}\nTotal de participantes: ${interaction.guild.memberCount} (bot também é gente!)`)
         }else{
-            await interaction.reply('Nenhum subcomando foi utilizado.')
+            await interaction.reply('Nenhum Subcomando foi utilizado.')
         }
 	},
 };

@@ -354,6 +354,7 @@ rayer.setIdade("22 anos")
 rayer.setNivelPri(10)
 rayer.setInventario("Escudo de Madeira")
 rayer.setInventario("Símbolo Sagrado")
+rayer.setInventario("Espada da Luz Trovejante(c)")
 rayer.setConjClass1Full()
 
 klaus.pornaTelaATabela()
