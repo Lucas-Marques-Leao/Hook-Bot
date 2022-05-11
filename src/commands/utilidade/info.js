@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageAttachment } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 
 
@@ -24,8 +24,7 @@ module.exports = {
 		if (interaction.options.getSubcommand() === "user"){
             const user = interaction.options.getUser("target")
             if (user){
-                
-                const file = new MessageAttachment('../../js/Hook Bot/src/fotos/darkicone.png');
+            
                 const userEmbed = new MessageEmbed()
                     .setTitle(`Sobre: ${user.username}!`)
                     .setURL("https://www.lmlservertest.x10.mx/suafichajs.html")

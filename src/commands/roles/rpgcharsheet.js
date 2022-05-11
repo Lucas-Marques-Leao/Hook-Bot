@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const {  MessageAttachment, MessageEmbed } = require('discord.js');
+const {  MessageEmbed } = require('discord.js');
 const { klaus, rayer } = require('../../classes-da-ficha/ficha.js');
 
 module.exports = {
@@ -15,7 +15,6 @@ module.exports = {
             if (interaction.member.roles.cache.has('972218325369245717')){
                 
                 const user = interaction.member.user
-                const file = new MessageAttachment('../../src/fotos/klaus.jpg');
                 const userEmbed = new MessageEmbed()
                     .setTitle(`Ficha D&D 5e`)
                     .setURL("https://www.lmlservertest.x10.mx/suafichajs.html")
@@ -36,7 +35,6 @@ module.exports = {
             }else if (interaction.member.roles.cache.has('972230868976406538')){
                 
                 const user = interaction.member.user
-                const file1 = new MessageAttachment('../../src/fotos/pisque.jpg');
                 const userEmbed2 = new MessageEmbed()
                     .setTitle(`Ficha de D&D 5e`)
                     .setURL("https://www.lmlservertest.x10.mx/suafichajs.html")

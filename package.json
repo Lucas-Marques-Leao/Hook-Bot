@@ -2,7 +2,7 @@
   "name": "botinho",
   "version": "1.0.0",
   "description": "Loucuras de um louco",
-  "main": "index.js",
+  "main": "/src/index.js",
   "scripts": {
     "test": "jest",
     "/./": "nodemon src/index.js",
@@ -26,8 +26,13 @@
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.16",
     "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
     "puppeteer": "^13.7.0",
     "quickdb": "^1.0.5",
-    "sequelize": "^6.19.0"
+    "sequelize": "^6.19.0",
+    "sequelizer": "^1.1.4"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
   }
 }
