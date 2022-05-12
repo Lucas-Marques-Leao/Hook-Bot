@@ -9,7 +9,7 @@ module.exports = class Ficha extends Model {
                 primaryKey: true,
                 allowNull: false,
             },
-            authorId: { 
+            author_id: { 
                 type: DataTypes.STRING,
                 allowNull: false,
                 primaryKey: true,
@@ -27,6 +27,12 @@ module.exports = class Ficha extends Model {
                 type: DataTypes.STRING,
                 allowNull: true,
             },
+
+            foto: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+
             classe_pri: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -45,31 +51,38 @@ module.exports = class Ficha extends Model {
             },
             str_at: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                allowNull: true,
+                defaultValue: 10,
             },
             dex_at: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                allowNull: true,
+                defaultValue: 10,
             },
             con_at: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                allowNull: true,
+                defaultValue: 10,
             },
             int_at: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                allowNull: true,
+                defaultValue: 10,
             },
             wis_at: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                allowNull: true,
+                defaultValue: 10,
             },
             cha_at: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                allowNull: true,
+                defaultValue: 10,
             },
             inventario: {
                 type: DataTypes.ARRAY(DataTypes.STRING),
                 allowNull: true,
+                
             },
             saude: { 
                 type: DataTypes.INTEGER,
@@ -84,11 +97,7 @@ module.exports = class Ficha extends Model {
                 allowNull: true,
             },
             
-        }, {
-            tableName: 'users',
-            timestamps: true,
-            sequelize
-        });
+        }, { sequelize, modelName: 'ficha'});
     }
 
     getNomeFicha(){
@@ -147,6 +156,11 @@ module.exports = class Ficha extends Model {
         return this.nivel
     }
 
+    setNivel(){
+        this.nivel = this.nivel_pri + this.nivel_sec
+        this.proficiencia();
+    }
+
     getNivelConj(){
         return this.nivel_conj
     }
@@ -169,6 +183,14 @@ module.exports = class Ficha extends Model {
 
     setIdade(age){
         this.idade = age
+    }
+
+    getFoto() {
+        return this.foto
+    }
+
+    setFoto(pic) {
+        this.foto = pic
     }
 
     setAtributos(strength, dexterity, constitution, intelligence, wisdom, charisma){
@@ -367,7 +389,7 @@ module.exports = class Ficha extends Model {
     pornaTelaATabela(){
         this.informacoes = 
         `
-         Nome: ${this.getNome()} 
+         Nome: ${this.getNomeFicha()} 
          Nível: ${this.getNivel()}
          Bônus de Proficiência: ${this.getProf()}
          Raça: ${this.getRaça()} 
