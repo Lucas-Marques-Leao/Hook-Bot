@@ -104,9 +104,14 @@ module.exports = class Ficha extends Model {
         return this.nome_ficha
     }
 
-    setNome(nom){
+    setNomeFicha(nom){
         this.nome_ficha = nom
     }
+
+    getAuthorId (){
+        return this.author_id
+    }
+
 
     getRaça(){
         return this.raça
