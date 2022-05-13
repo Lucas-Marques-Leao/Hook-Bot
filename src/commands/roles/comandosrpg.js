@@ -18,9 +18,10 @@ module.exports = {
             .setDescription(`Comandos do RPG`)
             .setThumbnail(client.user.displayAvatarURL())
             .addFields(
-                { name: '/addficha', value: 'Comando para criar uma ficha.\n Não permite criar fichas com o mesmo nome.'},
-                { name: '/fichainfo', value: 'Comando para ver os Status (ficha de um personagem).\n Adicione o Nome do personagem, acessível caso você seja o criador ou o Dungeon Master'},
+                { name: '/addficha', value: 'Comando para Criar uma ficha.\n Não permite criar fichas com o mesmo nome.'},
+                { name: '/fichainfo', value: 'Comando para Ver os Status (ficha de um personagem).\n Adicione o Nome do personagem, acessível caso você seja o criador ou o Dungeon Master'},
                 { name: '/deleteficha', value: 'Comando para Deletar uma ficha.\n Uso exclusivo do DM!'},
+                { name: '/updateatributos', value: 'Comando para Alterar os Atributos de uma Ficha.\n Uso exclusivo do DM!'},
             )
             .setTimestamp()
             .setFooter({

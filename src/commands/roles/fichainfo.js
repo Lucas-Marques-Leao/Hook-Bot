@@ -48,7 +48,7 @@ module.exports = {
             }
 
     }else{
-      return await interaction.reply({ content: "Essa ficha não foi encontrada" });
+      return await interaction.reply({ content: `A ficha de nome ${fichaName} não foi encontrada.` });
     }
   },
 };
