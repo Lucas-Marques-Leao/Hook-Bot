@@ -18,6 +18,7 @@ module.exports = class Ficha extends Model {
             nome_ficha: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true,
             },
             raça: {
                 type: DataTypes.STRING,
@@ -83,6 +84,7 @@ module.exports = class Ficha extends Model {
                 type: DataTypes.ARRAY(DataTypes.STRING),
                 allowNull: true,
                 
+                
             },
             saude: { 
                 type: DataTypes.INTEGER,
@@ -95,6 +97,7 @@ module.exports = class Ficha extends Model {
             nivel_conj: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
+                defaultValue: 0,
             },
             
         }, { sequelize, modelName: 'ficha'});
@@ -394,6 +397,8 @@ module.exports = class Ficha extends Model {
     pornaTelaATabela(){
         this.informacoes = 
         `
+         Criador: ${this.getAuthorId()}
+
          Nome: ${this.getNomeFicha()} 
          Nível: ${this.getNivel()}
          Bônus de Proficiência: ${this.getProf()}
