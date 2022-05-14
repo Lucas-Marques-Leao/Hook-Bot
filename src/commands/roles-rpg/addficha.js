@@ -32,7 +32,7 @@ module.exports = {
 
 
 		try {
-			// equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);
+			// Equivale à: INSERT INTO fichas (author_id, nome_ficha, raça, classe_pri, nivel_pri, foto) values (?, ?, ?, ?, ?, ?);
 			const ficha = await Ficha.create({
 				author_id: `${interaction.user.username}`,
 				nome_ficha: `${sheetName}`,

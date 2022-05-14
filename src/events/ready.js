@@ -1,7 +1,8 @@
-// const db = require('../config/database');
 const Ficha = require('../models/Ficha');
+const Armas = require('../models/Armas');
 require('dotenv').config();
 const Sequelize = require('sequelize');
+
 
 module.exports = {
     name: 'ready',
@@ -22,7 +23,10 @@ module.exports = {
             .then(() => {
                 console.log('Conectou-se à Database')
                 Ficha.init(sequelize);
+                Armas.init(sequelize);
+
                 Ficha.sync();
+                Armas.sync();
             })
         .catch(err => console.log(err));
     }

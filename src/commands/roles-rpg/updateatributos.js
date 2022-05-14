@@ -35,7 +35,7 @@ module.exports = {
                 const sabedoria = interaction.options.getInteger('wis');
                 const carisma = interaction.options.getInteger('cha');
 
-                // equivalent to: UPDATE tags (description) values (?) WHERE name='?';
+                // Equivalente a: UPDATE fichas (str) values (?) WHERE nome_ficha='?';
                 const affectedRows = await Ficha.update({ str_at: força, dex_at: destreza, con_at: constituicao, int_at: inteligencia, wis_at: sabedoria, cha_at: carisma }, { where: { nome_ficha: nome } });
 
                 if (affectedRows > 0) {

@@ -16,7 +16,7 @@ module.exports = {
 
        const fichaName = interaction.options.getString("nome");
 
-      // // equivalent to: SELECT * FROM tags WHERE nome_ficha = 'fichaName' LIMIT 1;
+      // // Equivale à: SELECT * FROM fichas WHERE nome_ficha = 'fichaName' LIMIT 1;
        const ficha = await Ficha.findOne({ where: { nome_ficha: fichaName } });
 
           if (ficha) {

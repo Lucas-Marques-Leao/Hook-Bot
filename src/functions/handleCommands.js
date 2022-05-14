@@ -4,8 +4,6 @@ const fs = require("fs");
 const clientId = "970832465642020905";
 const guildId = "970802893798117406";
 require('dotenv').config();
-const database = require('../config/database');
-const Ficha = require('../models/Ficha');
 
 module.exports = (client) => {
   client.handleCommands = async (commandFolders, path) => {

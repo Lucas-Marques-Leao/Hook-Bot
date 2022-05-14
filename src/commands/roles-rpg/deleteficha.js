@@ -9,13 +9,13 @@ module.exports = {
 	.addStringOption(option =>
 		option.setName('nome').setDescription('O nome do seu personagem').setRequired(true)),
 		
-  async execute(interaction, client , database) {
+  async execute(interaction) {
     if (!interaction.member.roles.cache.has("974046862325731358")) {
       return await interaction.reply({ content: "Você não é o DM!" });
     }
 
         const fichaName = interaction.options.getString('nome');
-        // equivalent to: DELETE from tags WHERE name = ?;
+        // Equivale à: DELETE from fichas WHERE nome_ficha = ?;
         const rowCount = await Ficha.destroy({ where: { nome_ficha: fichaName } });
     
         if (!rowCount) return interaction.reply('Essa Ficha não existe.');
