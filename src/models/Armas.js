@@ -3,11 +3,12 @@ const { Model, DataTypes } = require('sequelize');
 module.exports = class Armas extends Model{
     static init(sequelize) {
         return super.init({
+
             id: {
-                type: DataTypes.INTEGER,
-                autoIncrement: true,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
-                allowNull: false,
+                
             },
             
             nome_arma: {
@@ -18,6 +19,7 @@ module.exports = class Armas extends Model{
             bonus_magico: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
+                defaultValue: 0,
             },
 
             dano: {
@@ -28,24 +30,22 @@ module.exports = class Armas extends Model{
             propriedades: {
                 type: DataTypes.ARRAY(DataTypes.STRING),
                 allowNull: true,
+                
             },
 
             foto: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-
             
-            
-            
-            
-            
-            
-        }, { sequelize, modelName: 'armas'});
+   
+        }, { sequelize, modelName: 'Armas'});
+        
     }
 
+
     getNomeArma() {
-        if (this.bonus_magico) {
+        if (this.bonus_magico && this.bonus_magico > 0) {
             return `${this.nome_arma} +${this.bonus_magico}`;
         }else{
             return this.nome_arma;
@@ -72,11 +72,12 @@ module.exports = class Armas extends Model{
         this.propriedades.push(prop);
     }
 
+    getFoto() {
+        return this.foto;
+    }
 
-
-
-
-
-
+    setFoto(pic) {
+        this.foto = pic;
+    }
 
 }

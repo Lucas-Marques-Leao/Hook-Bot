@@ -1,7 +1,10 @@
 const Ficha = require('../models/Ficha');
 const Armas = require('../models/Armas');
+const Armas_Ficha = require('../models/Armas_Fichas');
+
 require('dotenv').config();
 const Sequelize = require('sequelize');
+
 
 
 module.exports = {
@@ -21,12 +24,30 @@ module.exports = {
         
         sequelize.authenticate()
             .then(() => {
-                console.log('Conectou-se à Database')
+                console.log('Conectou-se ao Banco de Dados')
+                
+                //Inicializar os Modelos:
                 Ficha.init(sequelize);
                 Armas.init(sequelize);
 
-                Ficha.sync();
-                Armas.sync();
+                //Associações:
+                Ficha.hasMany(Armas, { 
+
+                    foreignKey: {
+                        type: Sequelize.DataTypes.UUID,
+                        allowNull: false,
+                    }
+
+                });
+
+                Armas.belongsTo(Ficha);
+
+                
+                //Enfim, pôr os dados no Banco!
+                Ficha.sync({ alter: true});
+                Armas.sync({ alter: true});
+                // Armas_Ficha.sync({ alter: true});
+                
             })
         .catch(err => console.log(err));
     }

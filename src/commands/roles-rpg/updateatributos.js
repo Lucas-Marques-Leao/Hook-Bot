@@ -39,7 +39,7 @@ module.exports = {
                 const affectedRows = await Ficha.update({ str_at: força, dex_at: destreza, con_at: constituicao, int_at: inteligencia, wis_at: sabedoria, cha_at: carisma }, { where: { nome_ficha: nome } });
 
                 if (affectedRows > 0) {
-                    return interaction.reply(`A ficha ${nome} foi alterada com sucesso.`);
+                    return interaction.reply(`A ficha de ${nome} foi alterada com sucesso.`);
                 }
 
                 return interaction.reply(`Não foi encontrada uma ficha com o nome: ${nome}.`);

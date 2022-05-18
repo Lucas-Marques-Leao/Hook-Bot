@@ -26,3 +26,24 @@ module.exports = {
     }
   },
 };
+
+
+// module.exports = {
+//   name: 'messageCreate',
+//   async execute(message) {
+//       const prefix = "!";
+      
+//       if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+//       const command = message.client.prefixCommands.get(message.name);
+
+//       if (!command) return;
+
+//       try {
+//           await command.execute(message);
+//       } catch (error) {
+//           console.error(error);
+//           await message.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+//       }
+//   },
+// };

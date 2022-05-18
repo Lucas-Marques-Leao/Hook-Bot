@@ -27,10 +27,10 @@ module.exports = {
                     if (interaction.member.roles.cache.has("974046862325731358") || interaction.user.username === `${ficha.getAuthorId()}`) {
                     
                        // Equivalente a: UPDATE fichas (idade) values (?) WHERE nome_ficha='?';
-                     const affectedRows = await Ficha.update({ idade: `${idade} anos` }, { where: { nome_ficha: nome } });
+                       const affectedRows = await Ficha.update({ idade: `${idade} anos` }, { where: { nome_ficha: nome } });
 
                        if (affectedRows > 0) {
-                          return interaction.reply(`A ficha ${nome} foi alterada com sucesso.`);
+                          return interaction.reply(`A Ficha de ${nome} foi alterada com sucesso.`);
                     }
 
                 }else{
@@ -39,7 +39,7 @@ module.exports = {
 
                 // Equivalente a: UPDATE fichas (idade) values (?) WHERE nome_ficha='?';
                 }else{
-                    return await interaction.reply({content: `A ficha com o nome ${nome}, não foi encontrada`});
+                    return await interaction.reply({content: `A Ficha com o nome ${nome}, não foi encontrada`});
                 }
 
             

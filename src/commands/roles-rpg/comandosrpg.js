@@ -19,10 +19,11 @@ module.exports = {
             .setThumbnail(client.user.displayAvatarURL())
             .addFields(
                 { name: '/addficha', value: 'Comando para Criar uma ficha.\n Não permite criar fichas com o mesmo nome.'},
-                { name: '/fichainfo', value: 'Comando para Ver os Status (ficha de um personagem).\n Adicione o Nome do personagem, acessível caso você seja o criador ou o Dungeon Master'},
+                { name: '/meuid', value: 'Comando para mostrar o Id de uma ficha criada.\n Ele será necessário para acessar as informações da ficha'},
+                { name: '/fichainfo', value: 'Comando para Visualizar os Status (ficha de um personagem).\n Adicione o Nome do personagem e a Id.'},
                 { name: '/deleteficha', value: 'Comando para Deletar uma ficha.\n Uso exclusivo do DM!'},
                 { name: '/updateatributos', value: 'Comando para Alterar os Atributos de uma Ficha.\n Uso exclusivo do DM!'},
-                { name: '/updateidade', value: 'Comando para Alterar a idade.\n Adicione a idade (Em valor inteiro) à sua ficha'},
+                { name: '/updateidade', value: 'Comando para Alterar a Idade.\n Adicione a idade (Em valor inteiro) à sua ficha'},
                 { name: '/addarma', value: 'Comando para Criar uma Arma.\n Uso exclusivo do DM!'},
             )
             .setTimestamp()

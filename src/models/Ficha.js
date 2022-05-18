@@ -3,12 +3,13 @@ const { Model, DataTypes } = require('sequelize');
 module.exports = class Ficha extends Model {
     static init(sequelize) {
         return super.init({
+
             id: {
-                type: DataTypes.INTEGER,
-                autoIncrement: true,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
-                allowNull: false,
             },
+            
             author_id: { 
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -20,6 +21,7 @@ module.exports = class Ficha extends Model {
                 allowNull: false,
                 unique: true,
             },
+
             raça: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -27,6 +29,7 @@ module.exports = class Ficha extends Model {
             idade: {
                 type: DataTypes.STRING,
                 allowNull: true,
+                defaultValue: 'X anos',
             },
 
             foto: {
@@ -38,69 +41,83 @@ module.exports = class Ficha extends Model {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+
             nivel_pri: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
+
             classe_sec: {
                 type: DataTypes.STRING,
                 allowNull: true,
+                defaultValue: 'Nenhuma'
             },
+
             nivel_sec: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
+                defaultValue: 0,
             },
+
             str_at: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 defaultValue: 10,
             },
+
             dex_at: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 defaultValue: 10,
             },
+
             con_at: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 defaultValue: 10,
             },
+
             int_at: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 defaultValue: 10,
             },
+
             wis_at: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 defaultValue: 10,
             },
+
             cha_at: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 defaultValue: 10,
             },
-            inventario: {
-                type: DataTypes.ARRAY(DataTypes.STRING),
-                allowNull: true,
-                
-                
-            },
+            
             saude: { 
                 type: DataTypes.INTEGER,
                 allowNull: true,
+                defaultValue: 10,
             },
+
             saude_temp: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
+                defaultValue: 0,
             },
+
             nivel_conj: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 defaultValue: 0,
             },
             
-        }, { sequelize, modelName: 'ficha'});
+        }, { sequelize, modelName: 'Ficha'});
+    }
+
+    getId() {
+        return this.id;
     }
 
     getNomeFicha(){
@@ -179,10 +196,6 @@ module.exports = class Ficha extends Model {
 
     getInventario(){
         return this.inventario
-    }
-
-    setInventario(item){
-        this.inventario.push(item)
     }
 
     getIdade(){
@@ -395,17 +408,24 @@ module.exports = class Ficha extends Model {
     }
 
     pornaTelaATabela(){
-        this.informacoes = 
+        this.informacaobase = 
         `
          Criador: ${this.getAuthorId()}
+         Id da Ficha: ${this.getId()}
 
          Nome: ${this.getNomeFicha()} 
          Nível: ${this.getNivel()}
          Bônus de Proficiência: ${this.getProf()}
          Raça: ${this.getRaça()} 
+
+         Pontos de Vida: ${this.getSaude()} 
+         Pontos de Vida Temporários: ${this.getSaudeTemp()}
          
          Idade: ${this.getIdade()} 
+         `
          
+         this.informacaoclasses = 
+         `
          Classe Primária: ${this.getClassePri()} 
          Nível Primário: ${this.getNivelPri()} 
          
@@ -413,26 +433,34 @@ module.exports = class Ficha extends Model {
          Nível Secundário: ${this.getNivelSec()} 
          
          Nível de Conjurador: ${this.getNivelConj()}
-         Pontos de Vida: ${this.getSaude()} 
-         Pontos de Vida Temporários: ${this.getSaudeTemp()}
+         `
+         this.informacaoinventario =
+         `
          
-         Inventário: ${this.getInventario()}
-          
-         Atributos: 
-                     Força: ${this.getStrAt()}
-                     Destreza: ${this.getDexAt()}
-                     Constituição: ${this.getConAt()}
-                     Inteligência: ${this.getIntAt()}
-                     Sabedoria: ${this.getWisAt()}
-                     Carisma: ${this.getChaAt()} 
+          Armas: ${this.getArmas()}
+
+         `
+         this.infotributos =
+         `
+
+            Força: ${this.getStrAt()}
+            Destreza: ${this.getDexAt()}
+            Constituição: ${this.getConAt()}
+            Inteligência: ${this.getIntAt()}
+            Sabedoria: ${this.getWisAt()}
+            Carisma: ${this.getChaAt()} 
+        `
+        this.infomod =
+        `
+         
+            Mod de Força: ${this.getStrMod()}
+            Mod de Destreza: ${this.getDexMod()}
+            Mod de Constituição: ${this.getConMod()}
+            Mod de Inteligência: ${this.getIntMod()}
+            Mod de Sabedoria: ${this.getWisMod()}
+            Mod de Carisma: ${this.getChaMod()}
         
-         Modificadores: 
-                    Mod de Força: ${this.getStrMod()}
-                    Mod de Destreza: ${this.getDexMod()}
-                    Mod de Constituição: ${this.getConMod()}
-                    Mod de Inteligência: ${this.getIntMod()}
-                    Mod de Sabedoria: ${this.getWisMod()}
-                    Mod de Carisma: ${this.getChaMod()}`
+        `
     }
 
 }

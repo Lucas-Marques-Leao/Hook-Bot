@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const  Ficha  = require('../../models/Ficha');
+const Armas = require("../../models/Armas");
+const Ficha  = require('../../models/Ficha');
 
 
 module.exports = {
@@ -16,8 +17,8 @@ module.exports = {
 		option.setName('nível').setDescription('Nível da sua Classe Inicial').setRequired(true))
 	.addStringOption(option =>
 		option.setName('link_foto').setDescription('URL da Foto do Personagem').setRequired(true)),
-		
-  async execute(interaction, client , database) {
+
+  async execute(interaction) {
     if (!interaction.member.roles.cache.has("972180267265589258")) {
       return await interaction.reply({ content: "Você não é do RPG!" });
     }
@@ -29,6 +30,7 @@ module.exports = {
 		const sheetRace = interaction.options.getString('raça');
 		const sheetLevel = interaction.options.getInteger('nível');
 		const sheetPhoto = interaction.options.getString('link_foto');
+		
 
 
 		try {
@@ -40,18 +42,19 @@ module.exports = {
 				classe_pri: `${sheetClassePri}`,
 				nivel_pri: `${sheetLevel}`,
 				foto: `${sheetPhoto}`,
-		
+
+				
 			});
 
-			return interaction.reply(`a ficha de: ${ficha.nome_ficha}, da raça ${ficha.raça} e da classe ${ficha.classe_pri} foi adicionada por ${ficha.author_id}`);
+			return interaction.reply(`a Ficha de: ${ficha.nome_ficha}, da raça ${ficha.raça} e da classe ${ficha.classe_pri} foi adicionada por ${ficha.author_id}`);
 		}
 		catch (error) {
 			if (error.name === 'SequelizeUniqueConstraintError') {
-				return interaction.reply('Essa ficha já existe.');
+				return interaction.reply('Essa Ficha já existe.');
 			}
 
 			console.error(error);
-			return interaction.reply('Algo deu errado ao adicionar a ficha.');
+			return interaction.reply('Algo deu errado ao adicionar a Ficha.');
 		}
 	}
 };

@@ -7,7 +7,9 @@ module.exports = {
     .setName("addarma")
     .setDescription("Adicionar Arma (DM)")
 	.addStringOption(option =>
-		option.setName('nome').setDescription('O nome da Arma').setRequired(true))
+		option.setName('id').setDescription('O id do Player').setRequired(true))
+	.addStringOption(option =>
+		option.setName('nome').setDescription('o Nome da Arma').setRequired(true))
 	.addStringOption(option =>
 		option.setName('dano').setDescription('O dano não-mágico da Arma').setRequired(true))
 	.addStringOption(option =>
@@ -21,7 +23,7 @@ module.exports = {
       }
 
    
-		
+		const ficha_id = interaction.options.getString('id');
 		const weapomName = interaction.options.getString('nome');
 		const weapomDamage = interaction.options.getString('dano');
 		const weapomPhoto = interaction.options.getString('link_foto');
@@ -31,10 +33,12 @@ module.exports = {
 		try {
 			// Equivale à: INSERT INTO armas (nome_arma, bonus_magico, dano, propriedades, foto) values (?, ?, ?, ?, ?);
 			const arma = await Armas.create({
-				nome_arma: `${weapomName}`,
-				bonus_magico: `${weapomMagicBonus}`,
-				dano: `${weapomDamage}`,
-				foto: `${weapomPhoto}`,
+				
+				nome_arma: weapomName,
+				bonus_magico: weapomMagicBonus,
+				dano: weapomDamage,
+				foto: weapomPhoto,
+				FichaId: ficha_id,
 		
 			});
 
