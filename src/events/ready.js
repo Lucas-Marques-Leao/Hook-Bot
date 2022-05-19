@@ -27,26 +27,21 @@ module.exports = {
                 console.log('Conectou-se ao Banco de Dados')
                 
                 //Inicializar os Modelos:
+
                 Ficha.init(sequelize);
                 Armas.init(sequelize);
+                Armas_Ficha.init(sequelize);
 
                 //Associações:
-                Ficha.hasMany(Armas, { 
 
-                    foreignKey: {
-                        type: Sequelize.DataTypes.UUID,
-                        allowNull: false,
-                    }
-
-                });
-
-                Armas.belongsTo(Ficha);
+                Ficha.belongsToMany(Armas, { through: 'Armas_Ficha'});
+                Armas.belongsToMany(Ficha, { through: 'Armas_Ficha'});
 
                 
                 //Enfim, pôr os dados no Banco!
                 Ficha.sync({ alter: true});
                 Armas.sync({ alter: true});
-                // Armas_Ficha.sync({ alter: true});
+                
                 
             })
         .catch(err => console.log(err));
